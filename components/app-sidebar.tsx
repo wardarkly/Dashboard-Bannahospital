@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   IconCamera,
   IconChartBar,
@@ -17,12 +17,12 @@ import {
   IconSearch,
   IconSettings,
   IconUsers,
-} from "@tabler/icons-react"
+} from "@tabler/icons-react";
 
-import { NavDocuments } from "@/components/nav-documents"
-import { NavMain } from "@/components/nav-main"
-import { NavSecondary } from "@/components/nav-secondary"
-import { NavUser } from "@/components/nav-user"
+import { NavDocuments } from "@/components/nav-documents";
+import { NavMain } from "@/components/nav-main";
+import { NavSecondary } from "@/components/nav-secondary";
+import { NavUser } from "@/components/nav-user";
 import {
   Sidebar,
   SidebarContent,
@@ -31,7 +31,9 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
+import Image from "next/image";
+import { Ambulance, Hospital, LayoutGrid, Stethoscope } from "lucide-react";
 
 const data = {
   user: {
@@ -39,31 +41,66 @@ const data = {
     email: "m@example.com",
     avatar: "/avatars/shadcn.jpg",
   },
+  // navMain: [
+  //   {
+  //     title: "Dashboard",
+  //     url: "#",
+  //     icon: IconDashboard,
+  //   },
+  //   {
+  //     title: "Lifecycle",
+  //     url: "#",
+  //     icon: IconListDetails,
+  //   },
+  //   {
+  //     title: "Analytics",
+  //     url: "#",
+  //     icon: IconChartBar,
+  //   },
+  //   {
+  //     title: "Projects",
+  //     url: "#",
+  //     icon: IconFolder,
+  //   },
+  //   {
+  //     title: "Team",
+  //     url: "#",
+  //     icon: IconUsers,
+  //   },
+  // ],
   navMain: [
     {
-      title: "Dashboard",
-      url: "#",
-      icon: IconDashboard,
+      title: "Overview",
+      url: "/dashboard",
+      icon: LayoutGrid,
+      // isActive: true,
     },
     {
-      title: "Lifecycle",
+      title: "ผู้ป่วยนอก",
       url: "#",
-      icon: IconListDetails,
+      icon: Stethoscope,
+      // isActive: true,
+      items: [
+        { title: "Overview", url: "#" },
+        { title: "Performance", url: "#" },
+      ],
     },
     {
-      title: "Analytics",
+      title: "ER",
       url: "#",
-      icon: IconChartBar,
+      icon: Ambulance,
+      // isActive: true,
+      items: [{ title: "Overview", url: "#" }],
     },
     {
-      title: "Projects",
+      title: "ผู้ป่วยใน",
       url: "#",
-      icon: IconFolder,
-    },
-    {
-      title: "Team",
-      url: "#",
-      icon: IconUsers,
+      icon: Hospital,
+      // isActive: true,
+      items: [
+        { title: "Overview", url: "#" },
+        { title: "Performance", url: "#" },
+      ],
     },
   ],
   navClouds: [
@@ -148,7 +185,7 @@ const data = {
       icon: IconFileWord,
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -161,7 +198,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
               <a href="#">
-                <IconInnerShadowTop className="!size-5" />
+                {/* <IconInnerShadowTop className="!size-5" /> */}
+                <Image src="/icon.png" alt="Logo" width={32} height={32} />
                 <span className="text-base font-semibold">โรงพยาบาลบ้าานา</span>
               </a>
             </SidebarMenuButton>
@@ -170,12 +208,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavDocuments items={data.documents} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+        {/* <NavDocuments items={data.documents} /> */}
+        {/* <NavSecondary items={data.navSecondary} className="mt-auto" /> */}
       </SidebarContent>
-      <SidebarFooter>
+      {/* <SidebarFooter>
         <NavUser user={data.user} />
-      </SidebarFooter>
+      </SidebarFooter> */}
     </Sidebar>
-  )
+  );
 }

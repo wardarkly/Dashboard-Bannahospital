@@ -13,10 +13,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       }
     >
       <AppSidebar variant="inset" />
-      <SidebarInset>
-        
-        {children}
-      </SidebarInset>
+      <SidebarInset>{children}</SidebarInset>
     </SidebarProvider>
   );
 };
