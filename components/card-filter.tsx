@@ -12,22 +12,76 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, ChevronUp, Search } from "lucide-react";
+import {
+  Check,
+  ChevronDown,
+  ChevronsUpDown,
+  ChevronUp,
+  Search,
+} from "lucide-react";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
+
+const departments = [
+  { value: "all", label: "แผนกทั้งหมด" },
+  { value: "cardiology", label: "แผนกหัวใจ" },
+  { value: "orthopedics", label: "แผนกกระดูก" },
+  { value: "pediatrics", label: "แผนกเด็ก" },
+  { value: "emergency", label: "แผนกฉุกเฉิน" },
+];
+const rooms = [
+  { value: "all", label: "ห้องตรวจทั้งหมด" },
+  { value: "room-1", label: "ห้องตรวจ 1" },
+  { value: "room-2", label: "ห้องตรวจ 2" },
+  { value: "room-3", label: "ห้องตรวจ 3" },
+  { value: "room-4", label: "ห้องตรวจ 4" },
+];
+const clinics = [
+  { value: "all", label: "คลินิกทั้งหมด" },
+  { value: "general", label: "คลินิกทั่วไป" },
+  { value: "specialist", label: "คลินิกเฉพาะทาง" },
+  { value: "dental", label: "คลินิกทันตกรรม" },
+];
+const pttypes = [
+  { value: "all", label: "สิทธิการรักษาทั้งหมด" },
+  { value: "social-security", label: "ประกันสังคม" },
+  { value: "universal-coverage", label: "บัตรทอง (UC)" },
+  { value: "government", label: "สิทธิข้าราชการ" },
+  { value: "private", label: "ประกันเอกชน" },
+  { value: "self-pay", label: "จ่ายเอง" },
+];
 
 const CardFilter = () => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [dateRange, setDateRange] = useState("16/12/2025 - 16/12/2025");
+  const [depOpen, setDepOpen] = useState(false);
   const [department, setDepartment] = useState("all");
+  const [roomOpen, setRoomOpen] = useState(false);
   const [room, setRoom] = useState("all");
+  const [clinicOpen, setClinicOpen] = useState(false);
   const [clinic, setClinic] = useState("all");
-  const [treatmentRights, setTreatmentRights] = useState("all");
+  const [pttypeOpen, setPttypeOpen] = useState(false);
+  const [pttype, setPttype] = useState("all");
+  console.log(department);
   const handleSearch = () => {
     console.log("Searching with filters:", {
       dateRange,
       department,
       room,
       clinic,
-      treatmentRights,
+      pttype,
     });
   };
 
@@ -65,8 +119,8 @@ const CardFilter = () => {
 
       {/* Filter Content */}
       {isExpanded && (
-        <div className="p-6">
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="p-6 py-0">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {/* Date Range */}
             <div className="space-y-2">
               <Label
@@ -93,21 +147,59 @@ const CardFilter = () => {
               >
                 แผนก
               </Label>
-              <Select value={department} onValueChange={setDepartment}>
-                <SelectTrigger
-                  id="department"
-                  className="h-10 w-full border-input bg-background"
-                >
-                  <SelectValue placeholder="เลือกแผนก" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">แผนกทั้งหมด</SelectItem>
-                  <SelectItem value="cardiology">แผนกหัวใจ</SelectItem>
-                  <SelectItem value="orthopedics">แผนกกระดูก</SelectItem>
-                  <SelectItem value="pediatrics">แผนกเด็ก</SelectItem>
-                  <SelectItem value="emergency">แผนกฉุกเฉิน</SelectItem>
-                </SelectContent>
-              </Select>
+              <Popover open={depOpen} onOpenChange={setDepOpen}>
+                <PopoverTrigger id="department" asChild>
+                  <Button
+                    variant="outline"
+                    role="combobox"
+                    aria-expanded={depOpen}
+                    className="h-10 w-full border-input bg-background justify-between"
+                  >
+                    {department
+                      ? departments.find((value) => value.value === department)
+                          ?.label
+                      : "เลือกแผนก..."}
+                    <ChevronsUpDown className="opacity-50" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-[100%] p-0">
+                  <Command>
+                    <CommandInput placeholder="เลือกแผนก..." className="h-9" />
+                    <CommandList>
+                      <CommandEmpty>ไม่พบข้อมูล</CommandEmpty>
+                      <CommandGroup>
+                        {departments.map((dep) => (
+                          <CommandItem
+                            key={dep.value}
+                            value={dep.label}
+                            onSelect={(currentValue) => {
+                              console.log(currentValue);
+                              setDepartment(
+                                currentValue === department
+                                  ? ""
+                                  : departments.find(
+                                      (depval) => depval.label === currentValue
+                                    )?.value ?? ""
+                              );
+                              setDepOpen(false);
+                            }}
+                          >
+                            {dep.label}
+                            <Check
+                              className={cn(
+                                "ml-auto",
+                                department === dep.value
+                                  ? "opacity-100"
+                                  : "opacity-0"
+                              )}
+                            />
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
             </div>
 
             {/* Examination Room */}
@@ -158,36 +250,38 @@ const CardFilter = () => {
                 </SelectContent>
               </Select>
             </div>
-          </div>
 
-          {/* Treatment Rights - Full Width */}
-          <div className="mt-6 space-y-2">
-            <Label
-              htmlFor="treatment-rights"
-              className="text-sm font-medium text-foreground"
-            >
-              สิทธิการรักษา
-            </Label>
-            <Select value={treatmentRights} onValueChange={setTreatmentRights}>
-              <SelectTrigger
-                id="treatment-rights"
-                className="h-10 w-full border-input bg-background md:w-1/2 lg:w-1/4"
+            {/* Treatment Rights - Full Width */}
+            <div className="space-y-2">
+              <Label
+                htmlFor="treatment-rights"
+                className="text-sm font-medium text-foreground"
               >
-                <SelectValue placeholder="เลือกสิทธิการรักษา" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">สิทธิการรักษาทั้งหมด</SelectItem>
-                <SelectItem value="social-security">ประกันสังคม</SelectItem>
-                <SelectItem value="universal-coverage">บัตรทอง (UC)</SelectItem>
-                <SelectItem value="government">สิทธิข้าราชการ</SelectItem>
-                <SelectItem value="private">ประกันเอกชน</SelectItem>
-                <SelectItem value="self-pay">จ่ายเอง</SelectItem>
-              </SelectContent>
-            </Select>
+                สิทธิการรักษา
+              </Label>
+              <Select value={pttype} onValueChange={setPttype}>
+                <SelectTrigger
+                  id="treatment-rights"
+                  className="h-10 w-full border-input bg-background"
+                >
+                  <SelectValue placeholder="เลือกสิทธิการรักษา" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">สิทธิการรักษาทั้งหมด</SelectItem>
+                  <SelectItem value="social-security">ประกันสังคม</SelectItem>
+                  <SelectItem value="universal-coverage">
+                    บัตรทอง (UC)
+                  </SelectItem>
+                  <SelectItem value="government">สิทธิข้าราชการ</SelectItem>
+                  <SelectItem value="private">ประกันเอกชน</SelectItem>
+                  <SelectItem value="self-pay">จ่ายเอง</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
 
           {/* Search Button */}
-          <div className="mt-6 flex justify-center">
+          <div className="mt-4 flex justify-center">
             <Button
               onClick={handleSearch}
               className="h-11 w-full gap-2 md:w-auto md:px-16"

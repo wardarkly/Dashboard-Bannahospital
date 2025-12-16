@@ -81,7 +81,7 @@ const data = {
       icon: Stethoscope,
       // isActive: true,
       items: [
-        { title: "Overview", url: "#" },
+        { title: "Overview", url: "/dashboard/opd/overview" },
         { title: "Performance", url: "#" },
       ],
     },
