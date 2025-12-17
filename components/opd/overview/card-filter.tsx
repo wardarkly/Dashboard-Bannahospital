@@ -47,7 +47,7 @@ const pttypes = [
 const CardFilter = () => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [startDate, setStartDate] = useState<string | null>(
-    format(subDays(new Date(), 29), "yyyy-MM-dd")
+    format(new Date(), "yyyy-MM-dd")
   );
   const [endDate, setEndDate] = useState<string | null>(
     format(new Date(), "yyyy-MM-dd")

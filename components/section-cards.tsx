@@ -11,11 +11,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export function SectionCards() {
   return (
     <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-4">
-      <Card className="@container/card">
+      <Card className="@container/card pb-4">
         <CardHeader>
           <CardDescription>OPD วันนี้ (ครั้ง)</CardDescription>
           <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
@@ -27,11 +28,13 @@ export function SectionCards() {
             เดือนนี้ 11507 คน / 16391 ครั้ง
           </div>
         </CardContent>
-        <CardFooter className="flex-col items-end gap-1.5 text-sm">
-          <div className="">
-            รายละเอียด <ArrowRight className="inline-block w-4 h-4" />
-          </div>
-        </CardFooter>
+        <Link href="/dashboard/opd/overview">
+          <CardFooter className="flex-col items-end gap-1.5 text-sm">
+            <div className="">
+              รายละเอียด <ArrowRight className="inline-block w-4 h-4" />
+            </div>
+          </CardFooter>
+        </Link>
       </Card>
       <Card className="@container/card">
         <CardHeader>

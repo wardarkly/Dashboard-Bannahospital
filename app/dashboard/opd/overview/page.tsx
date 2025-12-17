@@ -1,5 +1,6 @@
 import { SiteHeader } from "@/components/site-header";
-import CardFilter from "@/components/card-filter";
+import CardFilter from "@/components/opd/overview/card-filter";
+import ChartJs from "@/components/opd/overview/chart-js";
 
 const OpdOverviewPage = () => {
   return (
@@ -19,8 +20,14 @@ const OpdOverviewPage = () => {
               </h1>
             </div>
             {/* Card Filter */}
-            <div className="p-4">
+            <div className="px-4 lg:px-6">
               <CardFilter />
+            </div>
+            {/* Chart */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="px-4 lg:px-6">
+                <ChartJs />
+              </div>
             </div>
           </div>
         </div>
