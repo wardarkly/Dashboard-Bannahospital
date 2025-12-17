@@ -119,7 +119,13 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.mobile-datepicker-popup .ant-picker-panel-container .ant-picker-panels {
+  display: grid;
+  grid-template-columns: 1fr;
 }

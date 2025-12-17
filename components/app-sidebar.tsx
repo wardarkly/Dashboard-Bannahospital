@@ -41,33 +41,6 @@ const data = {
     email: "m@example.com",
     avatar: "/avatars/shadcn.jpg",
   },
-  // navMain: [
-  //   {
-  //     title: "Dashboard",
-  //     url: "#",
-  //     icon: IconDashboard,
-  //   },
-  //   {
-  //     title: "Lifecycle",
-  //     url: "#",
-  //     icon: IconListDetails,
-  //   },
-  //   {
-  //     title: "Analytics",
-  //     url: "#",
-  //     icon: IconChartBar,
-  //   },
-  //   {
-  //     title: "Projects",
-  //     url: "#",
-  //     icon: IconFolder,
-  //   },
-  //   {
-  //     title: "Team",
-  //     url: "#",
-  //     icon: IconUsers,
-  //   },
-  // ],
   navMain: [
     {
       title: "Overview",
