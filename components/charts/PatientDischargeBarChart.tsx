@@ -87,7 +87,7 @@ const PatientDischargeBarChart = () => {
             คน
           </div>
           <Select value={filter} onValueChange={setFilter}>
-            <SelectTrigger className="w-full sm:w-[180px]">
+            <SelectTrigger className="w-full sm:w-[180px] py-0">
               <SelectValue placeholder="เลือกประเภท" />
             </SelectTrigger>
             <SelectContent>
@@ -103,7 +103,7 @@ const PatientDischargeBarChart = () => {
       <CardContent>
         <ChartContainer
           config={chartConfig}
-          className={isMobile ? "h-55 w-full" : "h-80 w-full"}
+          className={isMobile ? "h-55 w-full" : "h-123 w-full"}
         >
           <BarChart
             data={chartData}
@@ -144,36 +144,6 @@ const PatientDischargeBarChart = () => {
                 />
               );
             })}
-            {/* <Bar
-              dataKey="home"
-              fill="var(--color-home)"
-              radius={isMobile ? [4, 4, 0, 0] : [6, 6, 0, 0]}
-              //   barSize={isMobile ? 18 : 28}
-            />
-            <Bar
-              dataKey="admit"
-              fill="var(--color-admit)"
-              radius={isMobile ? [4, 4, 0, 0] : [6, 6, 0, 0]}
-              //   barSize={isMobile ? 18 : 28}
-            />
-            <Bar
-              dataKey="refer"
-              fill="var(--color-refer)"
-              radius={isMobile ? [4, 4, 0, 0] : [6, 6, 0, 0]}
-              //   barSize={isMobile ? 18 : 28}
-            />
-            <Bar
-              dataKey="er"
-              fill="var(--color-er)"
-              radius={isMobile ? [4, 4, 0, 0] : [6, 6, 0, 0]}
-              //   barSize={isMobile ? 18 : 28}
-            />
-            <Bar
-              dataKey="other"
-              fill="var(--color-other)"
-              radius={isMobile ? [4, 4, 0, 0] : [6, 6, 0, 0]}
-              //   barSize={isMobile ? 18 : 28}
-            /> */}
           </BarChart>
         </ChartContainer>
       </CardContent>
