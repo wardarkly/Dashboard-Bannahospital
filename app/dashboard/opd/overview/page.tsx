@@ -4,6 +4,8 @@ import PatientBarChart from "@/components/charts/PatientBarChart";
 import TypeComeBarChart from "@/components/charts/TypeComeBarChart";
 import PatientDischargeBarChart from "@/components/charts/PatientDischargeBarChart";
 import Top10DiseaseChart from "@/components/charts/Top10DiseaseChart";
+import VisitTypeDonutChart from "@/components/charts/VisitTypeDonutChart";
+import PtTypeDonutChart from "@/components/charts/PtTypeDonutChart";
 
 const OpdOverviewPage = () => {
   return (
@@ -39,6 +41,12 @@ const OpdOverviewPage = () => {
               </div>
               <div className="lg:col-span-1">
                 <Top10DiseaseChart />
+              </div>
+              <div className="lg:col-span-2">
+                <VisitTypeDonutChart />
+              </div>
+              <div className="lg:col-span-2">
+                <PtTypeDonutChart />
               </div>
             </div>
           </div>
